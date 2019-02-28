@@ -25,6 +25,27 @@
                                 <img class="img-fluid" id="blah" style="border: 2px dashed #000" src="{{asset('/uploads/empty.jpg')}}" alt="">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="" class="control-label">Size</label>
+                                <br>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" name="size[]" value="250,150,_thumb" type="checkbox">Thumb
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" name="size[]" value="250,345,_featured_thumb" type="checkbox">Featured Thumb
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" name="size[]" value="710,350,_featured" type="checkbox">Featured
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Register</button>

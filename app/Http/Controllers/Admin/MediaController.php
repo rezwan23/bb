@@ -46,10 +46,11 @@ class MediaController extends Controller
         $newPhoto = time();
         $ext = $image->getClientOriginalExtension();
         $destinationPath = public_path('/uploads/media');
-        Image::make($image->getRealPath())->resize(250, 150)->save($destinationPath.'/'.$newPhoto.'_thumb.'.$ext);
-        Image::make($image->getRealPath())->resize(250, 345)->save($destinationPath.'/'.$newPhoto.'_featured_thumb.'.$ext);
+        foreach ($request->size as $size){
+            $arr = explode(",", $size);
+            Image::make($image->getRealPath())->resize($arr[0], $arr[1])->save($destinationPath.'/'.$newPhoto.$arr[2].'.'.$ext);
+        }
         Image::make($image->getRealPath())->resize(120, 98)->save($destinationPath.'/'.$newPhoto.'_small.'.$ext);
-        Image::make($image->getRealPath())->resize(710, 350)->save($destinationPath.'/'.$newPhoto.'_featured.'.$ext);
         $data['media'] = $newPhoto;
         $data['ext'] = $ext;
         Media::create($data);
@@ -98,6 +99,9 @@ class MediaController extends Controller
      */
     public function destroy(Media $medium)
     {
+        if($medium->post){
+            return back();
+        }
         $this->deleteImages($medium);
         $medium->delete();
         return back();
@@ -106,9 +110,11 @@ class MediaController extends Controller
     public function deleteImages(Media $medium){
         $image_path = public_path('uploads/media');
         $ext = $medium->ext;
-        unlink($image_path.'/'.$medium->media.'_thumb.'.$ext);
-        unlink($image_path.'/'.$medium->media.'_featured_thumb.'.$ext);
-        unlink($image_path.'/'.$medium->media.'_small.'.$ext);
-        unlink($image_path.'/'.$medium->media.'_featured.'.$ext);
+        $arr = ['_thumb','_featured_thumb', '_small', '_featured'];
+        foreach($arr as $s_arr){
+            if(file_exists($image_path.'/'.$medium->media.$s_arr.'.'.$ext)){
+                unlink($image_path.'/'.$medium->media.$s_arr.'.'.$ext);
+            }
+        }
     }
 }

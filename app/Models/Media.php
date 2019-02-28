@@ -29,6 +29,6 @@ class Media extends Model
 
     public function post()
     {
-        return $this->hasOne(Post::class, 'media_id');
+        return $this->hasOne(Post::class, 'featured_media_id');
     }
 }
