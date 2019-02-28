@@ -16,6 +16,10 @@
                             <input class="form-control" type="text" placeholder="Enter Site Name" name="name" value="{{!empty($configuration)?$configuration->name:''}}">
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <textarea name="description" class="form-control" id="" cols="30" rows="5" name="description">{{!empty($configuration->description)?$configuration->description:''}}</textarea>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label">Logo</label>
                             <input class="form-control" type="file" name="logo" onchange="readURL(this);">
                         </div>

@@ -65,6 +65,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Featured</label>
+                            <select name="is_featured" id="featured" class="form-control">
+                                <option value="1" @if($post->is_featured==1) selected @endif>Yes</option>
+                                <option value="0" @if($post->is_featured==0) selected @endif>No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Serial" class="control-label">Serial</label>
+                            <input type="number" value="{{$post->serial}}" name="serial" min="0" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label class="control-label">Content</label>
                             <textarea id="editor" class="form-control" name="content" rows="2" placeholder="Enter page content">{{$post->content}}</textarea>
                             @if($errors->has('content'))

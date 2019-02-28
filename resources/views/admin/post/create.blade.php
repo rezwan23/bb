@@ -44,6 +44,17 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Featured</label>
+                            <select name="is_featured" id="featured" class="form-control">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Serial" class="control-label">Serial</label>
+                            <input type="number" name="serial" min="0" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label class="control-label">Content</label>
                             <textarea id="editor" class="form-control" name="content" rows="2" placeholder="Enter page content"></textarea>
                             @if($errors->has('content'))

@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.post.index', ['posts'=>Post::all()]);
+        return view('admin.post.index', ['posts'=>Post::query()->orderBy('serial')->get()]);
     }
 
     /**
@@ -54,6 +54,8 @@ class PostController extends Controller
             'style'     =>  '',
             'meta'  =>  '',
             'featured_media_id'  =>  '',
+            'is_featured'   =>  '',
+            'serial'    =>  '',
         ]);
         $post = Post::create($data);
         $post->categories()->attach($request->category_id);
@@ -81,7 +83,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         return view('admin.post.edit', [
-            'post'  => $post->with('categories', 'tags')->first(),
+            'post'  => $post,
             'categories'    =>  Category::all(),
             'tags'  =>  Tag::all(),
             'medias'    =>  Media::all(),
@@ -103,6 +105,8 @@ class PostController extends Controller
             'style'     =>  '',
             'meta'  =>  '',
             'featured_media_id'  =>  '',
+            'is_featured'   =>  '',
+            'serial'    =>  ''
         ]);
         $post->update($data);
         $post->categories()->sync($request->category_id);

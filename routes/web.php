@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
@@ -32,4 +32,11 @@ Route::group(['namespace'=>'Admin', 'prefix'=>'admin'], function (){
     Route::resource('media', 'MediaController');
     Route::get('home-page', 'MetaController@homePage')->name('page.home');
     Route::post('home-page', 'MetaController@storeHomePageMeta');
+});
+
+
+Route::group(['namespace'=>'User'], function(){
+    Route::get('/', 'FrontEndController@index')->name('home');
+    Route::get('/{post}', 'FrontEndController@singlePost')->name('post.single');
+    Route::get('category/{category}', 'FrontEndController@singleCategory')->name('category.single');
 });

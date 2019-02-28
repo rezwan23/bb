@@ -24,6 +24,7 @@ class SiteConfigurationController extends Controller
             'pinterest'=>'',
             'g_plus'=>'',
             'twitter'=>'',
+            'description'   =>  ''
         ]);
         $configurationInfo = SiteConfiguration::first();
         if($configurationInfo){

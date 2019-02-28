@@ -19,7 +19,7 @@ class Page extends Model
         ];
     }
     protected $fillable = [
-        'title', 'slug', 'content', 'style', 'meta'
+        'title', 'slug', 'content', 'style', 'meta',
     ];
 
     public function getRouteKeyName()

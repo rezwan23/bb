@@ -18,7 +18,7 @@ class Post extends Model
         ];
     }
     protected $fillable = [
-        'title', 'slug', 'content', 'style', 'meta', 'featured_media_id'
+        'title', 'slug', 'content', 'style', 'meta', 'featured_media_id', 'is_featured', 'serial'
     ];
 
     public function getRouteKeyName()
