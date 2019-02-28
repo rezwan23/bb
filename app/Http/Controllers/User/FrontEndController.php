@@ -20,10 +20,12 @@ class FrontEndController extends Controller
     {
         return view('user.post.single',[
             'post'=>$post,
+            'related_post'  =>  Post::query()->inRandomOrder()->take(6)->get(),
         ]);
     }
 
-    public function singleCategory(Category $category){
+    public function singleCategory(Category $category)
+    {
         return view('user.category.single',[
             'category'  =>  $category,
         ]);

@@ -83,95 +83,27 @@
                     <div class="side-bar__inner is_stuck" data-sticky_column>
                         <div class="widget widget--title-box single-cat">
                             <div class="widget__title">
-                                <h4>Popular News</h4>
+                                <h4>Explore More</h4>
                             </div>
                             <ul class="posts-wrap">
-
+                                @foreach($related_post as $r_post)
                                 <li>
                                     <figure>
-                                        <a href="#"><img src="img/thumb/p21-80x65.jpg" alt=""></a>
+                                        <a href="{{route('post.single', $r_post->slug)}}"><img src="{{asset('uploads/media/'.$r_post->media->getMedia('small'))}}" alt="{{$post->title}}"></a>
                                     </figure>
                                     <div class="post-content">
                                         <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
+                                            <time datetime="{{$r_post->created_at}}">{{\Carbon\Carbon::parse($r_post->created_at)->toFormattedDateString()}}  </time>
                                         </div>
                                         <h6 class="post-title">
-                                            <a href="#">
-                                                The easiest way to own the
-                                                Bohemian Look
+                                            <a href="{{route('post.single', $r_post->slug)}}">
+                                                {!! \Illuminate\Support\Str::words($r_post->title, 8, '....') !!}
                                             </a>
                                         </h6>
 
                                     </div>
                                 </li>
-                                <li>
-                                    <figure>
-                                        <a href="#"><img src="img/thumb/p22-80x65.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                Jaguar F-Type on Display at
-                                                the LA Auto Show
-                                            </a>
-                                        </h6>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure>
-                                        <a href="#"><img src="img/thumb/p26-80x65.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                Mutual Fund Mark Down Ub
-                                                Investments by Up to 15%
-                                            </a>
-                                        </h6>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure>
-                                        <a href="#"><img src="img/thumb/p20-80x65.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                The Open-Floor-Plan Backlas
-                                                How Family Members Are.
-                                            </a>
-                                        </h6>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure>
-                                        <a href="#"><img src="img/thumb/p26-80x65.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                Beijing’s Campaign Against is
-                                                South Korean Goods Leaves.
-                                            </a>
-                                        </h6>
-
-                                    </div>
-                                </li>
+                                @endforeach
 
                             </ul>
                         </div>
