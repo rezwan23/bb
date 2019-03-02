@@ -75,7 +75,12 @@
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-                <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();
+"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                <form action="{{route('logout')}}" id="logout-form" method="post">
+                    @csrf
+                </form>
             </ul>
         </li>
     </ul>

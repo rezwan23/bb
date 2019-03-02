@@ -23,6 +23,14 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    public function showRegistrationForm()
+    {
+        if(User::all()->count()>0){
+            return redirect()->route('home');
+        }
+        return view('auth.register');
+    }
+
     /**
      * Where to redirect users after registration.
      *

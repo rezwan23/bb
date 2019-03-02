@@ -1,11 +1,11 @@
 @extends('user.layouts.master')
-@section('title', $category->name)
+@section('title', $tag->name)
 @section('content')
     <section class="u-margin-t-40 u-margin-b-40">
         <div class="container">
             <div class="posts-box2 u-padding-b-0">
                 <div class="posts-box2__top">
-                    <h3><span>{{$category->name}}</span></h3>
+                    <h3><span>{{$tag->name}}</span></h3>
                 </div>
 
                 <div class="posts-list-one-half row">

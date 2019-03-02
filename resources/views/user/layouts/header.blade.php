@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-8 text-center">
                     <div class="header__logo">
-                        <a href="#"><img src="{{asset('uploads/'.$meta->logo)}}" alt="{{$meta->name}}"></a>
+                        <a href="{{route('home')}}"><img src="{{asset('uploads/'.$meta->logo)}}" alt="{{$meta->name}}"></a>
                     </div>
                 </div>
                 <div class="col-2">
@@ -62,9 +62,10 @@
                     <div class="header__search__form">
                         <div class="header__search__inner">
                             <button class="close-btn JS-form-close"><i class="ico-close"></i></button>
-                            <form class="header__search__form-wrapper" action="#">
-                                <button class="search-action"><span class="ico-search"></span></button>
-                                <input class="search-input" type="text" placeholder="Search here">
+                            <form class="header__search__form-wrapper" action="{{route('search')}}" method="post">
+                                @csrf
+                                <button class="search-action" type="submit"><span class="ico-search"></span></button>
+                                <input class="search-input" name="search" type="text" placeholder="Search here">
                             </form>
                         </div>
                     </div><!--// header search area end-->
@@ -76,86 +77,20 @@
     <nav class="header__nav d-none d-lg-block">
         <div class="container text-center u-relative">
             <ul>
-                <li class="has-dropdown"><a href="#">Home</a>
-                    <ul class="menu-dropdown">
-                        <li><a href="home-new-york.html">New York</a></li>
-                        <li class="active"><a href="home-vancouver.html">Vancouver</a></li>
-                        <li><a href="home-tokyo.html">Tokyo</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-has-mega-menu has-mega-menu parent__megaMenu pos-left"><a href="#">Sports</a>
-                    <div class="mega-menu">
-                        <!-- Nav tabs -->
-                        <ul class="mega-menu__nav">
-                            <li class="active"><a href="#">Football</a></li>
-                            <li><a href="#">Cricket</a></li>
-                            <li><a href="#"> Basketball</a></li>
-                            <li><a href="#">Board sports</a></li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="megam-menu__content">
-                            <div class="megam-menu__content__inner">
-                                <article  class="post-item">
-                                    <div class="post-item__inner">
-                                        <figure>
-                                            <a href="#"><img src="{{asset('user/img/thumb/p118-350x200.jpg')}}" alt=""></a>
-                                        </figure>
-                                        <div class="post-content">
-                                            <h6 class="post-title">
-                                                <a href="#">The easiest way to own
-                                                    the Bohemyan Look</a></h6>
-                                            <div class="post-meta">
-                                                <time datetime="2018-02-14 20:00"><i class="fa fa-clock-o"></i>Sept. 20, 2018  </time>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </article>
-                                <article  class="post-item">
-                                    <div class="post-item__inner">
-                                        <figure>
-                                            <a href="#"><img src="{{asset('user/img/thumb/p118-350x200.jpg')}}" alt=""></a>
-                                        </figure>
-                                        <div class="post-content">
-                                            <h6 class="post-title">
-                                                <a href="#">Jaguar Type on Display
-                                                    at the LA Auto Show</a></h6>
-                                            <div class="post-meta">
-                                                <time datetime="2018-02-14 20:00"><i class="fa fa-clock-o"></i>Sept. 20, 2018  </time>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </article>
-                                <article  class="post-item">
-                                    <div class="post-item__inner">
-                                        <figure>
-                                            <a href="#"><img src="{{asset('user/img/thumb/p118-350x200.jpg')}}" alt=""></a>
-                                        </figure>
-                                        <div class="post-content">
-                                            <h6 class="post-title">
-                                                <a href="#">Mutual Fund Mark Down
-                                                    UberInvestments</a></h6>
-                                            <div class="post-meta">
-                                                <time datetime="2018-02-14 20:00"><i class="fa fa-clock-o"></i>Sept. 20, 2018  </time>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-
-                    </div> <!--//Mega Menu end -->
-
-
-                </li>
-                <li><a href="#">Entertainment</a>
-                </li>
-                <li><a href="#">World News</a></li>
-                <li><a href="#">Opinion</a></li>
-                <li><a href="contact.html">Technology</a></li>
+                <li><a href="{{route('home')}}">Home</a></li>
+                @foreach($menus as $menu)
+                    @if($menu->subMenus->count()>0)
+                        <li class="has-dropdown"><a href="#">{{$menu->name}}</a>
+                            <ul class="menu-dropdown">
+                                @foreach($menu->subMenus as $s_menu)
+                                <li><a href="{{\Illuminate\Support\Facades\URL::to('/'.$s_menu->slug)}}">{{$s_menu->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @else
+                        <li><a href="{{\Illuminate\Support\Facades\URL::to('/'.$menu->slug)}}">{{$menu->name}}</a>
+                    @endif
+                @endforeach
             </ul>
         </div>
     </nav>
@@ -165,43 +100,36 @@
         <button  id="JS-closeButton"><i class="ico-close"></i></button>
     </div>
     <div class="search-form">
-        <form action="#">
-            <input placeholder="Search Here" type="text">
-            <button><i class="ico-search"></i></button>
+        <form action="{{route('search')}}" method="post">
+            @csrf
+            <input placeholder="Search Here" name="search" type="text">
+            <button type="submit"><i class="ico-search"></i></button>
         </form>
     </div>
     <nav class="mobile-menu">
         <ul>
-            <li class="active"><a class="collapsed has-child" data-toggle="collapse" aria-expanded="true"  href="#cat-col-1">Home</a>
-                <ul id="cat-col-1" class="collapse" aria-expanded="true">
-                    <li><a href="home-new-york.html">New York</a></li>
-                    <li><a href="home-vancouver.html">Vancouver</a></li>
-                    <li><a href="home-tokyo.html">Tokyo</a></li>
-                </ul>
-            </li>
-            <li><a class="collapsed has-child"  data-toggle="collapse" href="#cat-col-2" aria-expanded="true">Archive</a>
-                <ul aria-expanded="true" id="cat-col-2" class="collapse">
-                    <li><a href="archive-nyork.html">Archive(New York)</a></li>
-                    <li><a href="archive-tokyo.html">Archive(Tokyo)</a></li>
-                </ul>
-            </li>
-            <li><a class="no-child"  href="contact.html">Contact</a></li>
-            <li><a class="collapsed has-child"  data-toggle="collapse" href="#cat-col-4" aria-expanded="true">News</a>
-                <ul aria-expanded="true" id="cat-col-4" class="collapse">
-                    <li><a href="single-post-nyork.html">Single News (New York)</a></li>
-                    <li><a href="single-post-vancouver.html">Single News (Vancouver)</a></li>
-                    <li><a href="single-post-tokyo.html">Single News (Tokyo)</a></li>
-                </ul>
-            </li>
-
+            <li><a class="no-child"  href="{{route('home')}}">Home</a></li>
+            @foreach($menus as $m_menu)
+                @if($m_menu->subMenus->count()>0)
+                    <li class="active"><a class="collapsed has-child" data-toggle="collapse" aria-expanded="true"  href="#cat-col-{{$m_menu->id}}">Home</a>
+                        <ul id="cat-col-{{$m_menu->id}}" class="collapse" aria-expanded="true">
+                            @foreach($m_menu->subMenus as $m_s_menu)
+                                <li><a href="{{\Illuminate\Support\Facades\URL::to('/'.$m_s_menu->slug)}}">{{$m_s_menu->name}}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @else
+                    <li><a class="no-child"  href="{{\Illuminate\Support\Facades\URL::to('/'.$m_menu->slug)}}">Contact</a></li>
+                @endif
+            @endforeach
         </ul>
     </nav>
     <div class="social-links">
         <ul>
-            <li><a href="#"><span class="ion-social-facebook"></span></a></li>
-            <li><a href="#"><span class="ion-social-twitter"></span></a></li>
-            <li><a href="#"><span class="ion-social-googleplus"></span></a></li>
-            <li><a href="#"><span class="ion-social-tumblr"></span></a></li>
+            <li><a href="{{$meta->fb}}"><span class="ion-social-facebook"></span></a></li>
+            <li><a href="{{$meta->twitter}}"><span class="ion-social-twitter"></span></a></li>
+            <li><a href="{{$meta->g_plus}}"><span class="ion-social-googleplus"></span></a></li>
+            <li><a href="{{$meta->pinterest}}"><span class="ion-social-pinterest"></span></a></li>
         </ul>
     </div>
 </div><!--// Mobile menu area end -->

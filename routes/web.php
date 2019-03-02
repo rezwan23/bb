@@ -39,4 +39,7 @@ Route::group(['namespace'=>'User'], function(){
     Route::get('/', 'FrontEndController@index')->name('home');
     Route::get('/{post}', 'FrontEndController@singlePost')->name('post.single');
     Route::get('category/{category}', 'FrontEndController@singleCategory')->name('category.single');
+    Route::get('tag/{tag}', 'FrontEndController@singleTag')->name('tag.single');
+    Route::post('/search', 'FrontEndController@search')->name('search');
+    Route::get('/search/{search}', 'FrontEndController@searchResults')->name('search.results');
 });

@@ -50,7 +50,7 @@
                         <div class="entry-content">
                             <p>
                                 <img class="aligncenter u-radius-3" src="{{asset('uploads/media/'.$post->media->getMedia('featured'))}}" alt="{{$post->title}}">
-                                <small>Aenean luctus mauris ut risus semper tincidunt.</small>
+                                <small>{{$post->media->title}}</small>
 
                             </p>
                             {!! $post->content !!}
@@ -60,7 +60,7 @@
                             <h6>Tags :</h6>
                             <div class="tags-wrap">
                                 @foreach($post->tags as $tag)
-                                    <a class="cat-world" href="#"><i class="fa fa-tag" aria-hidden="true"></i>{{$tag->name}}</a>
+                                    <a class="cat-world" href="{{route('tag.single', $tag->slug)}}"><i class="fa fa-tag" aria-hidden="true"></i>{{$tag->name}}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -106,103 +106,6 @@
                                 @endforeach
 
                             </ul>
-                        </div>
-
-                        <div class="widget widget--title-box opinion">
-                            <div class="widget__title">
-                                <h4>Opinions</h4>
-                            </div>
-                            <ul class="o-lists">
-
-                                <li>
-                                    <div class="num"></div>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                The easiest way to own the london
-                                                Bohemian The new york Look
-                                            </a>
-                                        </h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="num"></div>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                The easiest way to own the london
-                                                Bohemian The new york Look
-                                            </a>
-                                        </h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="num"></div>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                The easiest way to own the london
-                                                Bohemian The new york Look
-                                            </a>
-                                        </h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="num"></div>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                The easiest way to own the london
-                                                Bohemian The new york Look
-                                            </a>
-                                        </h6>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="num"></div>
-                                    <div class="post-content">
-                                        <div class="post-meta">
-                                            <time datetime="2018-02-14 20:00">Sept. 20, 2018  </time>
-                                        </div>
-                                        <h6 class="post-title">
-                                            <a href="#">
-                                                The easiest way to own the london
-                                                Bohemian The new york Look
-                                            </a>
-                                        </h6>
-                                    </div>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                        <div class="widget widget--title-box post-categoris">
-                            <div class="widget__title">
-                                <h4>Categories </h4>
-                            </div>
-                            <div class="post-categoris__wrap">
-                                <p>Your email address will not be this published. Required fields are News Today.</p>
-                                <button type="button" class="cat-ctrl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Select Categories <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                </button>
-                                <div class="dropdown-menu w-categoris">
-                                    <a class="dropdown-item" href="#">Politics News</a>
-                                    <a class="dropdown-item" href="#">World News</a>
-                                    <a class="dropdown-item" href="#">Feature News</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
